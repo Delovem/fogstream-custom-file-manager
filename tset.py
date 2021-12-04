@@ -7,7 +7,7 @@ win = tk.Tk()
 
 icon = tk.PhotoImage(file='icon.png')
 win.iconphoto(False, icon)
-win.title('carfinder v0.1 beta')
+win.title('custom file manager v0.1 beta')
 # win.geometry('305x280')
 win.geometry('465x600')
 win.resizable(False, False)
@@ -32,9 +32,9 @@ def get_entry_filename():
 def dir_delaem_delo():
     dir_result = os.listdir(path=get_entry_filename())
 
-    print(*dir_result)
     if os.path.isdir(get_entry_filename()) == True:
-        field_1.insert(0.0, *dir_result)
+        for i in dir_result:
+            field_1.insert(0.0, dir_result(i))
     else:
         msg = "Неверно указан путь"
         mb.showwarning("Предупреждение", msg)
