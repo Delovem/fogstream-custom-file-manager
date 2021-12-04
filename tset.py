@@ -1,5 +1,5 @@
 import tkinter as tk
-import openpyxl
+import os
 from tkinter import filedialog
 from tkinter import messagebox as mb
 
@@ -8,15 +8,16 @@ win = tk.Tk()
 icon = tk.PhotoImage(file='icon.png')
 win.iconphoto(False, icon)
 win.title('carfinder v0.1 beta')
-win.geometry('305x280')
+# win.geometry('305x280')
+win.geometry('465x600')
 win.resizable(False, False)
 
 filename = str()
 
 
 def open_dir():
-    """диалоговое окно для выбора файла
-    так же подтягивает путь до файла в первое поле ввода"""
+    """диалоговое окно для выбора папки
+    так же подтягивает путь директорию в первое поле ввода"""
 
     filename = filedialog.askdirectory()
     entry_1.insert(0, filename)
@@ -24,18 +25,24 @@ def open_dir():
 
 
 def get_entry_filename():
-    """получает текст пути до файла"""
+    """получает директорию из поля entry_1"""
     entry_value = entry_1.get()
     return entry_value
 
 def dir_delaem_delo():
-    pass
+    dir_result = os.listdir(path=get_entry_filename())
+
+    print(*dir_result)
+    if os.path.isdir(get_entry_filename()) == True:
+        field_1.insert(0.0, *dir_result)
+    else:
+        msg = "Неверно указан путь"
+        mb.showwarning("Предупреждение", msg)
 
 
 def close_window():
     """закрывает окно"""
     win.destroy()
-
 
 def about_soft():
     """информационное окно"""
@@ -65,7 +72,7 @@ button_2 = tk.Button(text='Готово', command=dir_delaem_delo).grid(row=1, c
 button_3 = tk.Button(text='О программе', command=about_soft).grid(row=4, column=0, stick='we')
 button_4 = tk.Button(text='Закрыть', command=close_window).grid(row=4, column=1, columnspan=2, stick='we')
 
-field_1 = tk.Text(win, height=10, width=35, wrap='word')
+field_1 = tk.Text(win, height=30, width=55, wrap='word')
 field_1.grid(row=3, column=0, columnspan=3)
 
 scroller_1 = tk.Scrollbar(win, command=field_1.yview)
