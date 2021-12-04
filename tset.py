@@ -31,10 +31,12 @@ def get_entry_filename():
 
 def dir_delaem_delo():
     dir_result = os.listdir(path=get_entry_filename())
+    dir_result = dir_result[::-1]
 
     if os.path.isdir(get_entry_filename()) == True:
-        for i in dir_result:
-            field_1.insert(0.0, dir_result(i))
+        for i in range(len(dir_result)):
+            print(dir_result[i], '\n')
+            field_1.insert(1.0, (dir_result[i]+'\n'))
     else:
         msg = "Неверно указан путь"
         mb.showwarning("Предупреждение", msg)
