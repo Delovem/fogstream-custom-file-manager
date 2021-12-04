@@ -23,6 +23,8 @@ def open_dir():
     entry_1.insert(0, filename)
     return str(filename)
 
+def show_error_warning():
+    mb.showwarning("Предупреждение", 'Системе не удается найти указанный путь')
 
 def get_entry_filename():
     """получает директорию из поля entry_1"""
@@ -32,7 +34,6 @@ def get_entry_filename():
 def dir_delaem_delo():
     dir_result = os.listdir(path=get_entry_filename())
     dir_result = dir_result[::-1]
-
     if os.path.isdir(get_entry_filename()) == True:
         for i in range(len(dir_result)):
             print(dir_result[i], '\n')
